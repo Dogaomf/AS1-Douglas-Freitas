@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listar Filmes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>A quanto tempo foi lançado</th>
+                <th>Nota Imdb</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+          
+          		
+            
+            <tbody>
+            	<tr th:each="filme: ${filmes}">
+	        	<td th:text="${filme.id}"></td>
+		        <td th:text="${filme.nome}"></td>
+		        <td> <span th:text="${data} - ${filme.ano}"></span> Anos {<span th:text="${filme.ano}"></span>}</td>
+		        <td th:text="${filme.notaImdb}"></td>
+		        <td>
+                    <div class="btn-group" role="group" aria-label="Ações">
+                        <a th:href="@{/editar/{id}(id=${filme.id})}" class="btn btn-info btn-sm">Editar</a>
+                        <a th:href="@{/excluir/{id}(id=${filme.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                </td>	
+	    	</tr>
+            </tbody>
+            
+        </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a th:href="@{/novo/{id}}" class="btn btn-primary">Novo</a>
+              <form th:action="@{/buscar}" method="get" class="form-inline">
+	               <button type="submit" class="btn btn-default glyphicon glyphicon-search">Avaliados 60%</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
